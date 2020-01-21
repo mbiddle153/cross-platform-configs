@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/biddlem/OMSCS/CS7646/ML4T_2019Fall/.git'
+let g:netrw_dirhist_2='/home/biddlem/OMSCS/CS6476/CS6476_PS01/.git'
+let g:netrw_dirhist_3='/home/biddlem/OMSCS/CS7646/ML4T_2019Fall/assess_learners/Data'
+let g:netrw_dirhist_4='/home/biddlem/OMSCS/CS7646/ML4T_2019Fall/assess_learners/__pycache__'
+let g:netrw_dirhist_5='/home/biddlem/OMSCS/CS6476/CS6476_PS01'
+let g:netrw_dirhist_6='/home/biddlem/OMSCS/CS6476/ps03'
+let g:netrw_dirhist_7='/home/biddlem/OMSCS/CS6476/final_project/.git'
