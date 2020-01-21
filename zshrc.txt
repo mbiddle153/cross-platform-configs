@@ -101,7 +101,13 @@ source $ZSH/oh-my-zsh.sh
 
 # launch alias
 alias spotify='/var/lib/snapd/snap/bin/spotify &'
+alias spot='spotify'
 alias firefox='/usr/bin/firefox &'
+#alias python='python3'
+#alias pycharm='/home/biddlem/pycharm-community-2018.2.4/bin/pycharm.sh'
+alias bc='/usr/bin/bcompare'
+alias stg='gnome-control-center'
+alias discord='~/Discord/Discord'
 
 # cmd line alias
 alias refresh='source ~/.zshrc'
@@ -112,9 +118,19 @@ alias ..='cd .. && ls'
 alias ....='cd ../../ && ls'
 alias ......='cd ../../../ && ls'
 alias p='ps'
-#alias python='python3'
-#alias pycharm='/home/biddlem/pycharm-community-2018.2.4/bin/pycharm.sh'
 alias df='df -h'
+alias night='systemctl suspend'
+alias nt='night'
+alias hib='systemctl start systemd-hibernate.service';
+alias pks='pulseaudio --kill; pulseaudio --start'
+
+# git aliases
+alias gis='git status'
+alias gad='git add *'
+alias gci='git commit'
+alias gps='git push'
+
+alias mystart='firefox; gnome-terminal; gnome-terminal'
 
 # useful functions
 function l() {
@@ -143,6 +159,10 @@ function findd() {
     fi
 }
 
+function ot() {
+    ls -t | head -n1 | xargs $1
+}
+
 # added by Anaconda3 2018.12 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -160,3 +180,32 @@ fi
 unset __conda_setup
 # <<< conda init <<<
 
+strlen () {
+    FOO=$1
+    local zero='%([BSUbfksu]|([FB]|){*})'
+    LEN=${#${(S%%)FOO//$~zero/}}
+    echo $LEN
+}
+
+# show right prompt with date ONLY when command is executed
+preexec () {
+    DATE=$( date +"[%H:%M:%S]" )
+    local len_right=$( strlen "$DATE" )
+    len_right=$(( $len_right+1 ))
+    local right_start=$(($COLUMNS - $len_right))
+
+    local len_cmd=$( strlen "$@" )
+    local len_prompt=$(strlen "$PROMPT" )
+    local len_left=$(($len_cmd+$len_prompt))
+
+    RDATE="\033[${right_start}C ${DATE}"
+
+    if [ $len_left -lt $right_start ]; then
+        # command does not overwrite right prompt
+        # ok to move up one line
+        echo -e "\033[1A${RDATE}"
+    else
+        echo -e "${RDATE}"
+    fi
+
+}
